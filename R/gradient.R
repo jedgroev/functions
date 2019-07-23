@@ -14,6 +14,7 @@
 #' @param tdist = distance of text from gradient bar  
 #' @param labels = vector with min and max value
 #' @param If pos is null than dist (distance from border) and place (upperright, lowerleft, upperleft, lowerright) is used to determine the position 
+#' @param tcol text color of labels and title 
 
 #' @keywords gradient scale
 
@@ -41,7 +42,7 @@
 #' gradient(x,y, col=colors, pos=c(21,18)) # using pos 
 #' gradient(x,y, col=colors, dist=c(0.1,0.1), place = 'upperleft') # using dist and place 
 
- gradient <- function(x,y,colors,len=c(0.1,0.2),pos=NULL,dist=c(0.1,0.1),place='upperright', bars=5, tdist=0.04,labels= c(0,1), title=NULL,tdisttitle=0.04, font=1) {
+ gradient <- function(x,y,colors,len=c(0.1,0.2),pos=NULL,dist=c(0.1,0.1),place='upperright', bars=5, tdist=0.04,labels= c(0,1), title=NULL,tdisttitle=0.04, font=1, tcol='white') {
 
      if (length(pos) == 0 & length(dist) != 0){
        if (place == 'upperright') {
@@ -101,10 +102,11 @@
      polygon(polx,poly)
      
      # plot labels 
-     text((max(polx) + (max(x)*tdist)), max(poly), max(labels[2]), cex=0.9)
-     text((max(polx) + (max(x)*tdist)), min(poly), min(labels[1]), cex=0.9)
+     text((max(polx) + (max(x)*tdist)), max(poly), max(labels[2]), cex=0.9,col=tcol)
+     text((max(polx) + (max(x)*tdist)), (min(poly)+max(poly))/2, round((labels[1]+labels[2])/2,2), cex=0.9,col=tcol)
+     text((max(polx) + (max(x)*tdist)), min(poly), min(labels[1]), cex=0.9,col=tcol)
      if (length(title) != 0){
-       text(sum(unique(polx))/2,max(poly)+tdisttitle,title, xpd=NA, font=font)
+       text(sum(unique(polx))/2,max(poly)+tdisttitle,title, col=tcol,xpd=NA, font=font)
      }
 
    } 
