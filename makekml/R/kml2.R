@@ -1,0 +1,83 @@
+#' kml2
+#'
+#' Generates a kml including the heading
+
+#' @param obj spatialpointsdataframe with the parameters 
+#' @param altitude altitude column in the data frame of obj
+#' @param colour column that represents the colours in the data frame of obj
+#' @param heading column that represents the heading in the data frame of obj
+#' @param size variable that represents the size in the data frame of obj
+#' @param size_scale rescaling min and max value
+#' @param icon image weblink readible by plotKLM or an image you want to use as icon 
+#' @param filename output file name of the kml
+#' @param legend_icon png that represents the legend 
+
+#' @keywords kml, heading
+
+#' @examples 
+#' prepare a dataframe 
+#' obj <- data.frame(altitude=1:100,colour=heat.colors(100),heading=1:100,variable=runif(100),longitude=seq(15.202020, 16.202020,length.out=100), latitude=seq(45.459069,46.543523,length.out=100))
+#' coordinates(obj) <- c('longitude','latitude')
+#' proj4string(obj)<- CRS("+init=epsg:4326")
+
+#' Example using png plucked from the internet 
+#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable',icon="http://maps.google.com/mapfiles/kml/shapes/airports.png",filename='test.kml')
+
+#' Example using png locally stored
+#' # first generate an icon
+#' icon <- function(pch=21){
+#' par(bg=NA)
+#' plot(1,1,axes=FALSE,ann=FALSE, cex =30, col='black',bg='white',pch=pch)
+#' } 
+#' export(func=icon(),'icon',type='png')
+#' # use function with the generated icon
+#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable',icon="icon.png",filename='test.kml')
+
+
+
+kml2 <- function(obj,altitude,colour,heading,size,size_scale=c(0.5,2),icon,filename='text.kml', legend_icon=NULL){
+  require(sp)
+  require(plotKML)
+  require(scales)
+  # obj = spatialpointsdataframe
+  # altitude = column name with altitude info
+  # ...
+  # icon = icon weblink
+  
+  obj$rownumber <- 1:nrow(obj)
+  require("XML")
+  pnt.kml <- newXMLNode('kml')
+  h2 <- newXMLNode("Document", parent = pnt.kml)
+  h3 <- newXMLNode("name", "flight", parent= h2)
+  h4 <- newXMLNode("Folder", parent=pnt.kml[["Document"]])
+  txtc <- paste0('<Placemark><name/><styleUrl>#pnt',obj$rownumber[2:nrow(obj)],
+                 '</styleUrl><Point><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><coordinates>'
+                 ,coordinates(obj)[2:nrow(obj),1],',',coordinates(obj)[2:nrow(obj),2],',',round(obj@data[2:nrow(obj),altitude]),'</coordinates></Point></Placemark>')
+  style <- paste0('<Style id="', 'pnt',obj$rownumber[2:nrow(obj)],'"><LabelStyle><scale>',0.5,'</scale></LabelStyle><IconStyle><color>',col2kml(obj@data[2:nrow(obj),colour]),'</color><heading>',obj@data[2:nrow(obj),heading]-180,'</heading>
+                <scale>',rescale(obj@data[2:nrow(obj),size],size_scale),'</scale>
+                <Icon><href>',icon,'</href></Icon></IconStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style>')
+
+  txtc_start <- paste0('<Placemark><name/><styleUrl>#pnt',1,
+                 '</styleUrl><Point><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><coordinates>'
+                 ,coordinates(obj)[1,1],',',coordinates(obj)[1,2],',',round(obj@data[1,altitude]),'</coordinates></Point></Placemark>')
+  style_start <- paste0('<Style id="', 'pnt',1,'"><LabelStyle><scale>',0.5,'</scale></LabelStyle><IconStyle><color>',col2kml(obj@data[1,colour]),'</color>
+                <scale>',rescale(obj@data[1,size],size_scale),'</scale>
+                <Icon><href>','http://maps.google.com/mapfiles/kml/pal2/icon18.png','</href></Icon></IconStyle><BalloonStyle><text>StarTrack</text></BalloonStyle></Style>')
+  if(is.null(legend_icon) == FALSE){
+  legend <- paste0('<ScreenOverlay><name>Legend: Gradient</name><Icon><href>',legend_icon,'</href></Icon>
+    <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+    <screenXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+  <rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+  <size x="0" y="0" xunits="fraction" yunits="fraction"/></ScreenOverlay>')
+  }
+
+  parseXMLAndAdd(style_start, parent = h4)
+  parseXMLAndAdd(txtc_start, parent = h4)
+  parseXMLAndAdd(style, parent = h4)
+  parseXMLAndAdd(txtc, parent = h4)
+  if(is.null(legend_icon) == FALSE){
+  parseXMLAndAdd(legend, parent = h4)
+  }
+
+  XML::saveXML(pnt.kml, filename)
+ }
