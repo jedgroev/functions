@@ -6,6 +6,7 @@
 #' @param filename output file name of the kmz
 
 #' @keywords kml,kmz
+#' @export
 
 #' @examples 
 #' prepare a dataframe 

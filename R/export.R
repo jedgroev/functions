@@ -7,8 +7,8 @@
 #' @param res2 resolution
 #' @param ratio ratio between with and height
 #' @param type pdf, png or tif
-
 #' @keywords export, png, tif, pdf
+#' @export
 
 #' @examples 
 #' EXAMPLE 1

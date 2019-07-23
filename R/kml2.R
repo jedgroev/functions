@@ -13,6 +13,7 @@
 #' @param legend_icon png that represents the legend 
 
 #' @keywords kml, heading
+#' @export
 
 #' @examples 
 #' prepare a dataframe 

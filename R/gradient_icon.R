@@ -11,6 +11,7 @@
 #' @param tcol color of labels and title
 
 #' @keywords gradient, plot
+#' @export
 
 #' @examples 
 #' export(gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.05,bars=10,title=NULL),res2=30,ratio=0.8,'gradient_icon',type='png') 

@@ -7,6 +7,7 @@
 #' @param bg color background
 
 #' @keywords export, icon, png
+#' @export
 
 #' @examples 
 #' # generate and export an icon

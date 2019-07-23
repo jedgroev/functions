@@ -17,6 +17,7 @@
 #' @param tcol text color of labels and title 
 
 #' @keywords gradient scale
+#' @export
 
 #' @examples 
      
