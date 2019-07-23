@@ -1,1 +1,1 @@
-In this repository I store all functions in different useful R-packages.
+functions to make a kml, kmz, an icon and a gradient legend
