@@ -6,7 +6,7 @@
 \usage{
 gradient(x, y, colors, len = c(0.1, 0.2), pos = NULL, dist = c(0.1,
   0.1), place = "upperright", bars = 5, tdist = 0.04, labels = c(0,
-  1), title = NULL, tdisttitle = 0.04, font = 1)
+  1), title = NULL, tdisttitle = 0.04, font = 1, tcol = "white")
 }
 \arguments{
 \item{x}{= x axis values}
@@ -28,6 +28,8 @@ gradient(x, y, colors, len = c(0.1, 0.2), pos = NULL, dist = c(0.1,
 \item{tdist}{= distance of text from gradient bar}
 
 \item{labels}{= vector with min and max value}
+
+\item{tcol}{text color of labels and title}
 
 \item{if}{pos is null dist and place can be used to set the position of the}
 

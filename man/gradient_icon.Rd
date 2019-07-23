@@ -5,7 +5,8 @@
 \title{gradient_icon}
 \usage{
 gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
-  labels = c(500, 1000), tdist = 0.01, bars = 10, title = NULL)
+  labels = c(0, 1), tdist = 0.01, bars = 10, title = NULL,
+  dist = c(0.15, 0.15), tcol = "white")
 }
 \arguments{
 \item{col}{spatialpointsdataframe with the parameters}
@@ -17,6 +18,10 @@ gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
 \item{bars}{number of lines in the gradient scale}
 
 \item{title}{title of the gradient scale}
+
+\item{dist}{distance from x and y top corner}
+
+\item{tcol}{color of labels and title}
 }
 \description{
 Generates a gradient scale
