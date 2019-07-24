@@ -14,12 +14,12 @@
 #' # generate and export an icon
 #' icon(pch=21, col='black',bg='white',filename='icon')
 
-icon <- function(pch=24,col='black',bg='white',filename=NULL){
+icon <- function(pch=24,col='black',bg='white',filename=NULL,ratio=0.5){
 
 	ff <- function(){
 		par(bg=NA)
 		plot(1,1,axes=FALSE,ann=FALSE, cex =40, col=col,bg=bg,pch=pch)
 		}
 	ff()
-if(is.null(filename) == FALSE){export(func=ff(),filename,type='png')}
+if(is.null(filename) == FALSE){export(func=ff(),filename,type='png',ratio=ratio)}
 }

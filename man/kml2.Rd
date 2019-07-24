@@ -50,7 +50,6 @@ gradient_icon(col=colors_legend$colour,
               title='title',
               tdist=0.2,
               tcol='white',
-              res2=30,
               ratio=0.5,
               filename='gradient_icon')
 kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable_size',icon="icon.png",filename='test.kml',legend_icon='gradient_icon.png')

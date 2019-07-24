@@ -4,7 +4,8 @@
 \alias{icon}
 \title{icon}
 \usage{
-icon(pch = 24, col = "black", bg = "white", filename = NULL)
+icon(pch = 24, col = "black", bg = "white", filename = NULL,
+  ratio = 0.5)
 }
 \arguments{
 \item{pch}{symbol to use}
