@@ -67,7 +67,7 @@ kml2 <- function(obj,altitude,colour,heading,size,size_scale=c(0.5,2),icon,filen
                  '</styleUrl><Point><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><coordinates>'
                  ,coordinates(obj)[1,1],',',coordinates(obj)[1,2],',',round(obj@data[1,altitude]),'</coordinates></Point></Placemark>')
   style_start <- paste0('<Style id="', 'pnt',1,'"><LabelStyle><scale>',0.5,'</scale></LabelStyle><IconStyle><color>',col2kml(obj@data[1,colour]),'</color>
-                <scale>',scales::rescale(obj@data[1,size],size_scale),'</scale>
+                <scale>', scales::rescale(obj@data[1,size],size_scale),'</scale>
                 <Icon><href>','http://maps.google.com/mapfiles/kml/pal2/icon18.png','</href></Icon></IconStyle><BalloonStyle><text>StarTrack</text></BalloonStyle></Style>')
   if(is.null(legend_icon) == FALSE){
   legend <- paste0('<ScreenOverlay><name>Legend: Gradient</name><Icon><href>',legend_icon,'</href></Icon>
