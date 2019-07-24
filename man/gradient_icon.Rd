@@ -6,8 +6,7 @@
 \usage{
 gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
   labels = c(0, 1), tdist = 0.2, bars = 10, title = NULL,
-  dist = c(0.4, 0.2), tcol = "white", filename = NULL, ratio = 0.5,
-  res2 = 30)
+  dist = c(0.4, 0.2), tcol = "white", filename = NULL, ratio = 0.5)
 }
 \arguments{
 \item{col}{spatialpointsdataframe with the parameters}
@@ -27,8 +26,6 @@ gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
 \item{filename}{the name of the legend_icon when saving as a png, if NULL the png is not exported}
 
 \item{ratio}{height-width ratio}
-
-\item{res2}{resolution of the png legend}
 }
 \description{
 Generates a gradient scale
