@@ -26,28 +26,21 @@
 
 #' # Example using png locally stored
 #' # first generate an icon
-#' icon <- function(pch=21){
-#' par(bg=NA)
-#' plot(1,1,axes=FALSE,ann=FALSE, cex =30, col='black',bg='white',pch=pch)
-#' } 
-#' export(func=icon(),'icon',type='png')
+#' icon(pch=21, col='black',bg='white',filename='icon')
 #' # Use function with the generated icon
 #' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable_size',icon="icon.png",filename='test.kml')
 #' # Example that also includes a legend
 #' # generate a gradient
 #' colors_legend <- unique(obj@data[order(obj$variable_colour),c('colour','variable_colour')])
-#' g_func <- function(){gradient_icon(col=colors_legend$colour, 
+#' gradient_icon(col=colors_legend$colour, 
 #'               labels = round(c(min(colors_legend$variable_colour),max(colors_legend$variable_colour)),2),
 #'               bars=5,
 #'               title='title',
-#'               tdist=0.1,tcol='white')}
-#' g_func()
-#' # embed the gradient_icon function in the export function to generate the png of gradient_icon
-#' export(func=g_func(),
-#'        res2=30,
-#'        ratio=0.7,
-#'        file='gradient_icon',
-#'        type='png') 
+#'               tdist=0.2,
+#'               tcol='white',
+#'               res2=30,
+#'               ratio=0.5,
+#'               filename='gradient_icon')
 #' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable_size',icon="icon.png",filename='test.kml',legend_icon='gradient_icon.png')
 #' kml2kmz(c('icon.png','test.kml','gradient_icon.png'),'test_kmz')
 
