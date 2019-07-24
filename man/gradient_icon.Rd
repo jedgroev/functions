@@ -7,7 +7,7 @@
 gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
   labels = c(0, 1), tdist = 0.2, bars = 10, title = NULL,
   dist = c(0.4, 0.2), tcol = "white", filename = NULL, ratio = 0.5,
-  res = 30)
+  res2 = 30)
 }
 \arguments{
 \item{col}{spatialpointsdataframe with the parameters}
@@ -28,13 +28,13 @@ gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
 
 \item{ratio}{height-width ratio}
 
-\item{res}{resolution of the png legend}
+\item{res2}{resolution of the png legend}
 }
 \description{
 Generates a gradient scale
 }
 \examples{
-gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res=30,ratio=0.5) 
+gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res2=30,ratio=0.5) 
 }
 \keyword{gradient,}
 \keyword{plot}
