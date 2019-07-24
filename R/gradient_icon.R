@@ -11,12 +11,12 @@
 #' @param tcol color of labels and title
 #' @param filename the name of the legend_icon when saving as a png, if NULL the png is not exported
 #' @param ratio height-width ratio 
-
+#' @param res resolution of the png legend
 #' @keywords gradient, plot
 #' @export
 
 #' @examples 
-#' gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res2=30,ratio=0.5) 
+#' gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res=30,ratio=0.5) 
 
 gradient_icon <- function(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(0,1), tdist=0.2,bars=10,title=NULL,dist=c(0.40,0.20),tcol='white',filename=NULL,ratio=0.5,res2=30){
 
@@ -29,7 +29,7 @@ ff <- function(){
 	}
 ff()
 
-if(is.null(filename) == FALSE){export(func=ff(),filename,ratio=ratio,res2=res2,type='png')}
+if(is.null(filename) == FALSE){export(func=ff(),filename,ratio=ratio,res2=res,type='png')}
 
 
 }

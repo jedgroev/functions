@@ -27,12 +27,14 @@ gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
 \item{filename}{the name of the legend_icon when saving as a png, if NULL the png is not exported}
 
 \item{ratio}{height-width ratio}
+
+\item{res}{resolution of the png legend}
 }
 \description{
 Generates a gradient scale
 }
 \examples{
-gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res2=30,ratio=0.5) 
+gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res=30,ratio=0.5) 
 }
 \keyword{gradient,}
 \keyword{plot}
