@@ -4,7 +4,7 @@
 \alias{icon}
 \title{icon}
 \usage{
-icon(pch = 24, col = "black", bg = "white")
+icon(pch = 24, col = "black", bg = "white", filename = NULL)
 }
 \arguments{
 \item{pch}{symbol to use}
@@ -12,13 +12,15 @@ icon(pch = 24, col = "black", bg = "white")
 \item{col}{color border}
 
 \item{bg}{color background}
+
+\item{filename}{the name of the icon when saving as a png, if NULL the png is not exported}
 }
 \description{
 generate an icon
 }
 \examples{
 # generate and export an icon
-export(func=icon(pch=21, col='black',bg='white'),'icon',type='png') 
+icon(pch=21, col='black',bg='white',filename='icon')
 }
 \keyword{export,}
 \keyword{icon,}

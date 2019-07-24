@@ -5,8 +5,9 @@
 \title{gradient_icon}
 \usage{
 gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
-  labels = c(0, 1), tdist = 0.01, bars = 10, title = NULL,
-  dist = c(0.15, 0.15), tcol = "white")
+  labels = c(0, 1), tdist = 0.2, bars = 10, title = NULL,
+  dist = c(0.4, 0.2), tcol = "white", filename = NULL, ratio = 0.5,
+  res2 = 30)
 }
 \arguments{
 \item{col}{spatialpointsdataframe with the parameters}
@@ -22,12 +23,16 @@ gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
 \item{dist}{distance from x and y top corner}
 
 \item{tcol}{color of labels and title}
+
+\item{filename}{the name of the legend_icon when saving as a png, if NULL the png is not exported}
+
+\item{ratio}{height-width ratio}
 }
 \description{
 Generates a gradient scale
 }
 \examples{
-export(gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.05,bars=10,title=NULL),res2=30,ratio=0.8,'gradient_icon',type='png') 
+gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res2=30,ratio=0.5) 
 }
 \keyword{gradient,}
 \keyword{plot}
