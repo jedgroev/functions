@@ -6,6 +6,7 @@
 #' @param col color border
 #' @param bg color background
 #' @param filename the name of the icon when saving as a png, if NULL the png is not exported
+#' @param ratio the width/height ratio of the exported icon  
 
 #' @keywords export, icon, png
 #' @export

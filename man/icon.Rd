@@ -15,6 +15,8 @@ icon(pch = 24, col = "black", bg = "white", filename = NULL,
 \item{bg}{color background}
 
 \item{filename}{the name of the icon when saving as a png, if NULL the png is not exported}
+
+\item{ratio}{the width/height ratio of the exported icon}
 }
 \description{
 generate an icon
