@@ -18,7 +18,7 @@
 #' @examples 
 #' gradient_icon(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(500,1000), tdist=0.2,bars=10,title=NULL,filename='gradient_icon',res=30,ratio=0.5) 
 
-gradient_icon <- function(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(0,1), tdist=0.2,bars=10,title=NULL,dist=c(0.40,0.20),tcol='white',filename=NULL,ratio=0.5,res2=30){
+gradient_icon <- function(col=colorRampPalette(c('grey90','grey20'))(100), labels = c(0,1), tdist=0.2,bars=10,title=NULL,dist=c(0.40,0.20),tcol='white',filename=NULL,ratio=0.5,res=30){
 
 ff <- function(){
 	par(bg=NA, mar=c(0,0,1,0),oma=c(0,0,1,0), cex=2.8)

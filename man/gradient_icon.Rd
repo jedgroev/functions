@@ -7,7 +7,7 @@
 gradient_icon(col = colorRampPalette(c("grey90", "grey20"))(100),
   labels = c(0, 1), tdist = 0.2, bars = 10, title = NULL,
   dist = c(0.4, 0.2), tcol = "white", filename = NULL, ratio = 0.5,
-  res2 = 30)
+  res = 30)
 }
 \arguments{
 \item{col}{spatialpointsdataframe with the parameters}
