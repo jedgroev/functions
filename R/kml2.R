@@ -16,34 +16,46 @@
 #' @export
 
 #' @examples 
-#' prepare a dataframe 
-#' obj <- data.frame(altitude=1:100,colour=heat.colors(100),heading=1:100,variable=runif(100),longitude=seq(15.202020, 16.202020,length.out=100), latitude=seq(45.459069,46.543523,length.out=100))
+#' # Prepare a dataframe 
+#' obj <- data.frame(altitude=1:100,colour=heat.colors(100),variable_colour=1:100,heading=seq(1,365,length.out=100),variable_size=runif(100),longitude=seq(15.202020, 16.202020,length.out=100), latitude=seq(45.459069,46.543523,length.out=100),stringsAsFactors = FALSE)
 #' coordinates(obj) <- c('longitude','latitude')
 #' proj4string(obj)<- CRS("+init=epsg:4326")
 
-#' Example using png plucked from the internet 
-#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable',icon="http://maps.google.com/mapfiles/kml/shapes/airports.png",filename='test.kml')
+#' # Example using png plucked from the internet 
+#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable_size',icon="http://maps.google.com/mapfiles/kml/shapes/airports.png",filename='test.kml')
 
-#' Example using png locally stored
+#' # Example using png locally stored
 #' # first generate an icon
 #' icon <- function(pch=21){
 #' par(bg=NA)
 #' plot(1,1,axes=FALSE,ann=FALSE, cex =30, col='black',bg='white',pch=pch)
 #' } 
 #' export(func=icon(),'icon',type='png')
-#' # use function with the generated icon
-#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable',icon="icon.png",filename='test.kml')
-
+#' # Use function with the generated icon
+#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable_size',icon="icon.png",filename='test.kml')
+#' # Example that also includes a legend
+#' # generate a gradient
+#' colors_legend <- unique(obj@data[order(obj$variable_colour),c('colour','variable_colour')])
+#' g_func <- function(){gradient_icon(col=colors_legend$colour, 
+#'               labels = round(c(min(colors_legend$variable_colour),max(colors_legend$variable_colour)),2),
+#'               bars=5,
+#'               title='title',
+#'               tdist=0.1,tcol='white')}
+#' g_func()
+#' # embed the gradient_icon function in the export function to generate the png of gradient_icon
+#' export(func=g_func(),
+#'        res2=30,
+#'        ratio=0.7,
+#'        file='gradient_icon',
+#'        type='png') 
+#' kml2(obj,altitude='altitude',colour='colour',heading='heading',size='variable_size',icon="icon.png",filename='test.kml',legend_icon='gradient_icon.png')
+#' kml2kmz(c('icon.png','test.kml','gradient_icon.png'),'test_kmz')
 
 
 kml2 <- function(obj,altitude,colour,heading,size,size_scale=c(0.5,2),icon,filename='text.kml', legend_icon=NULL){
   require(sp)
   require(plotKML)
   require(scales)
-  # obj = spatialpointsdataframe
-  # altitude = column name with altitude info
-  # ...
-  # icon = icon weblink
   
   obj$rownumber <- 1:nrow(obj)
   require("XML")
@@ -54,7 +66,7 @@ kml2 <- function(obj,altitude,colour,heading,size,size_scale=c(0.5,2),icon,filen
   txtc <- paste0('<Placemark><name/><styleUrl>#pnt',obj$rownumber[2:nrow(obj)],
                  '</styleUrl><Point><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><coordinates>'
                  ,coordinates(obj)[2:nrow(obj),1],',',coordinates(obj)[2:nrow(obj),2],',',round(obj@data[2:nrow(obj),altitude]),'</coordinates></Point></Placemark>')
-  style <- paste0('<Style id="', 'pnt',obj$rownumber[2:nrow(obj)],'"><LabelStyle><scale>',0.5,'</scale></LabelStyle><IconStyle><color>',col2kml(obj@data[2:nrow(obj),colour]),'</color><heading>',obj@data[2:nrow(obj),heading]-180,'</heading>
+  style <- paste0('<Style id="', 'pnt',obj$rownumber[2:nrow(obj)],'"><LabelStyle><scale>',0.5,'</scale></LabelStyle><IconStyle><color>',col2kml(obj@data[2:nrow(obj),colour]),'</color><heading>',obj@data[2:nrow(obj),heading],'</heading>
                 <scale>',rescale(obj@data[2:nrow(obj),size],size_scale),'</scale>
                 <Icon><href>',icon,'</href></Icon></IconStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style>')
 
